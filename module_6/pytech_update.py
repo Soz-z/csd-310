@@ -14,7 +14,6 @@ def first_output():
         print(f"Student ID: {s_id}\nFirst Name: {fname}\nLast Name: {lname}\n")
 first_output()
 
-myquery ={""}
 
 db.students.update_one({"_id":1007},{"$set": {"last_name":"Dahmer"}})
 
