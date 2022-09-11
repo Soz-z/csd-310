@@ -6,7 +6,7 @@ db = client.pytech
 print("-- INSERT STATEMENTS --")
 def create_student(fname,lname,id=int):
     student = {
-        "student_id":id,
+        "_id":id,
         "first_name":fname,
         "last_name":lname
     }

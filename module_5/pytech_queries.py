@@ -11,17 +11,17 @@ def first_output():
     for doc in docs:
         fname = doc["first_name"]
         lname = doc["last_name"]
-        s_id = doc["student_id"]
+        s_id = doc["_id"]
         print(f"Student ID: {s_id}\nFirst Name: {fname}\nLast Name: {lname}\n")
 first_output()
 
 print("-- DISPLAYING STUDENT DOCUMENT FROM find_one() QUERY--")
-doc = db.students.find_one({"student_id": 1007})
+doc = db.students.find_one({"_id": 1007})
 
 def second_output(doc):
     fname = doc["first_name"]
     lname = doc["last_name"]
-    s_id = doc["student_id"]
+    s_id = doc["_id"]
     print(f"Student ID: {s_id}\nFirst Name: {fname}\nLast Name: {lname}\n")
 second_output(doc)
 
