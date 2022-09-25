@@ -11,7 +11,7 @@ config = {
 # include the try except finally error catcher
 # remember to close database (db.close())
 try:
-    db = mysql.connector.connect(**config) # connect to the pysports database 
+    db = mysql.connector.connect(**config)
     
     cursor = db.cursor()
     cursor.execute("SELECT team_id, team_name, mascot FROM team")
