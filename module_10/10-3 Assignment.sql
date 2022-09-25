@@ -91,7 +91,7 @@ INSERT INTO wishlist(user_id, book_id) VALUES(
     (SELECT book_id FROM book WHERE book_name = 'Heir to the Darkmage')
 
 );
--- 
+-- User 3
 INSERT INTO wishlist(user_id, book_id) VALUES(
     (SELECT user_id FROM user WHERE last_name = 'Kenobi'), 
     (SELECT book_id FROM book WHERE book_name = 'The Story of Doctor Dolittle')
