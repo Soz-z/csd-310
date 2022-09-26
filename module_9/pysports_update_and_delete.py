@@ -12,32 +12,37 @@ config = {
 # CLOSE THE DATABASE
 try:
     db = mysql.connector.connect(**config)
-
+# Insert Query
     cursor = db.cursor()
-    cursor.execute("INSERT INTO player (first_name, last_name, team_id) VALUES('Smeagol', 'Shire Folk', 1)")
+    insert_query = ("INSERT INTO player (first_name, last_name, team_id) VALUES('Smeagol', 'Shire Folk', 1)")
+    cursor.execute(insert_query)
+    # db.commit()
 
-    db.commit()
     cursor.execute("SELECT player_id, first_name, last_name, team_name FROM player INNER JOIN team ON player.team_id = team.team_id")
-    players = cursor.fetchall()
-# Insert query   
+    players = cursor.fetchall()   
     print(" -- DISPLAYING PLAYERS AFTER INSERT --")
     for p in players:
         print("Player ID: {}\nFirst Name: {}\nLast Name: {}\nTeam ID: {}\n".format(p[0], p[1], p[2], p[3]))
     print("\n")
 # Update query
-    cursor.execute("UPDATE player SET team_id = 2, first_name = 'Gollum', last_name = 'Ring Stealer' WHERE first_name = 'Smeagol'")
-    
+    update_query = ("UPDATE player SET team_id = 2, first_name = 'Gollum', last_name = 'Ring Stealer' WHERE first_name = 'Smeagol'")
+    cursor.execute(update_query)
+    cursor.execute("SELECT player_id, first_name, last_name, team_name FROM player INNER JOIN team ON player.team_id = team.team_id")
+    players = cursor.fetchall()   
     print(" -- DISPLAYING PLAYERS AFTER UPDATE --")
     for p in players:
         print("Player ID: {}\nFirst Name: {}\nLast Name: {}\nTeam ID: {}\n".format(p[0], p[1], p[2], p[3]))
     print("\n")
 # Delete query
-    cursor.execute("DELETE FROM player WHERE first_name = 'Smeagol'")
-    
+    delete_query = ("DELETE FROM player WHERE first_name = 'Gollum'")
+    cursor.execute(delete_query)
+    cursor.execute("SELECT player_id, first_name, last_name, team_name FROM player INNER JOIN team ON player.team_id = team.team_id")
+    players = cursor.fetchall()   
     print(" -- DISPLAYING PLAYERS AFTER DELETE --")
     for p in players:
         print("Player ID: {}\nFirst Name: {}\nLast Name: {}\nTeam ID: {}\n".format(p[0], p[1], p[2], p[3]))
     print("\n")
+
 
     input("Press 'Enter' key to continue...")
 
