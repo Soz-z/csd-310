@@ -39,7 +39,7 @@ CREATE TABLE wishlist (
     book_id     INT             NOT NULL,
     PRIMARY KEY(wishlist_id),
     CONSTRAINT fk_book      FOREIGN KEY (book_id)
-    REFERENCES book(book_id), --Utilized https://www.w3schools.com/sql/sql_foreignkey.asp because I had no idea.
+    REFERENCES book(book_id),
     CONSTRAINT fk_user      FOREIGN KEY (user_id)
     REFERENCES user(user_id)
 );
@@ -47,7 +47,7 @@ CREATE TABLE wishlist (
 -- create table store
 CREATE TABLE store(
     store_id    INT             NOT NULL    AUTO_INCREMENT,
-    locale      VARCHAR(500)    NOT NULL
+    locale      VARCHAR(500)    NOT NULL,
     PRIMARY KEY(store_id)
 );
 
