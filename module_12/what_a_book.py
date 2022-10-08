@@ -1,3 +1,13 @@
+"""
+    Title: what_a_book.py
+    Author: Daniel Clark
+    Date: 26 September 22
+    Description: Whatabook database manipulation
+"""
+
+
+
+# import Statements
 import sys
 import mysql.connector
 from mysql.connector import errorcode
@@ -11,6 +21,7 @@ config = {
     "raise_on_warnings": True
 }
 
+# Show menu method for displaying a menu
 def show_menu():
     print('\n-    MAIN MENU    -\n')
     menu_selection = int(input(' 1. View Books\n 2. Store Locations\n 3. My Account\n 4. Exit\n\nSelection: '))
@@ -20,6 +31,7 @@ def show_menu():
     else:
         return menu_selection
 
+# Show books method for displaying all available books
 def show_books(_cursor):
     _cursor.execute("SELECT book_id, book_name, author, details from book")
     books = _cursor.fetchall()
@@ -27,6 +39,7 @@ def show_books(_cursor):
     for book in books:
         print("Book Name: {}\nAuthor: {}\n Details: {}\n".format(book[0], book[1], book[2]))
 
+# Show locations method for displaying all locations
 def show_locations(_cursor):
     _cursor.execute("SELECT store_id, locale from store")
     locations = _cursor.fetchall()
@@ -34,6 +47,7 @@ def show_locations(_cursor):
     for location in locations:
         print("Location: {}\n".format(location[1]))
 
+# Validate User, checks input from user to make sure it matches a active user
 def validate_user():
     user_id = int(input('\nEnter Customer ID: \n'))
     if user_id > 0 or user_id <4:
@@ -42,6 +56,7 @@ def validate_user():
         print("Invalid Customer ID, please try again\n")
         sys.exit(0)
 
+# Shows the account menu of the user...includes try/except
 def show_account_menu():
     try:
         print('\n-    CUSTOMER MENU    -\n')
@@ -55,7 +70,8 @@ def show_account_menu():
     except ValueError:
         print("Invalid Menu Selection, please try again")
         sys.exit(0)
-    
+
+# Show wishlist that displays existing books on user wishlist, inner join
 def show_wishlist(_cursor, user_id):
     # Referenced github for this function, specifically the query. I tried joining queries in the same quote.
     _cursor.execute("SELECT user.user_id, user.first_name, user.last_name, book.book_id, book.book_name, book.author " + 
@@ -68,6 +84,7 @@ def show_wishlist(_cursor, user_id):
     for book in wishlist:
         print('Book Name: {}\nAuthor: {}\n'.format(book[4], book[5]))
 
+# Add books to wishlist method
 def show_books_to_add(_cursor, user_id):
     initial_query = ("SELECT book_id, book_name, author, details FROM book WHERE book_id NOT IN (SELECT book_id FROM wishlist WHERE user_id = {})".format(user_id))
     print(initial_query)
